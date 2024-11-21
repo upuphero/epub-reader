@@ -1,6 +1,6 @@
 // App.jsx
 import React, { useState } from 'react';
-import EpubUploader from './components/EpubUploader';
+import Sidebar from './components/Sidebar';
 import EpubReader from './components/EpubReader';
 import './App.css';
 
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="left-panel">
-        <EpubUploader onFileUpload={handleFileUpload} />
+        <Sidebar onFileUpload={handleFileUpload} />
       </div>
       <div className="right-panel">
         {epubFile && <EpubReader epubFile={epubFile} />}
