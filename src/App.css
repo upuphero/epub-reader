@@ -38,11 +38,13 @@ body, html {
 }
 
 .reader-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-items: center;
+  height: 100%;
   overflow: hidden;
+  padding: 0 50px; /* Make space for side buttons */
 }
 
 .viewer-wrapper {
@@ -84,4 +86,43 @@ body, html {
 
 .nav-button:not(:disabled):hover {
   background-color: #0056b3;
+}
+
+.side-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  z-index: 1000;
+}
+
+.side-nav-button:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.side-nav-button.left {
+  left: 0;
+}
+
+.side-nav-button.right {
+  right: 0;
+}
+
+.side-nav-button:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+
+.side-nav-button svg {
+  font-size: 20px;
 }

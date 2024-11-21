@@ -1,6 +1,8 @@
 // components/EpubReader.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import ePub from 'epubjs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const EpubReader = ({ epubFile }) => {
   const viewerRef = useRef(null);
@@ -18,7 +20,6 @@ const EpubReader = ({ epubFile }) => {
       const newRendition = newBook.renderTo(viewerRef.current, {
         width: '800px',  // Fixed width
         height: '600px', // Fixed height
-        
         flow: "scrolled-doc",
         spread: "none"
       });
@@ -51,22 +52,22 @@ const EpubReader = ({ epubFile }) => {
   return (
     <div className="reader-container">
       <div className="viewer-wrapper">
-        <div ref={viewerRef} className="viewer"></div>
-      </div>
-      <div className="navigation-controls">
         <button 
-          className="nav-button"
+          className="side-nav-button left"
           onClick={handlePrevious} 
           disabled={isLoading}
         >
-          Previous
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
+        
+        <div ref={viewerRef} className="viewer"></div>
+        
         <button 
-          className="nav-button"
+          className="side-nav-button right"
           onClick={handleNext} 
           disabled={isLoading}
         >
-          Next
+          <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
     </div>
