@@ -18,7 +18,8 @@ const EpubReader = ({ epubFile }) => {
       const newRendition = newBook.renderTo(viewerRef.current, {
         width: '800px',  // Fixed width
         height: '600px', // Fixed height
-        flow: "paginated",
+        
+        flow: "scrolled-doc",
         spread: "none"
       });
 
