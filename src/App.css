@@ -44,12 +44,13 @@ body, html {
   align-items: center;
   height: 100%;
   overflow: hidden;
-  padding: 0 50px; /* Make space for side buttons */
+  padding: 0 50px;
+  margin: 20px 0; /* Add margin for better spacing */
 }
 
 .viewer-wrapper {
   width: 800px;
-  height: 600px;
+  height: 100vh; 
   margin: 0 auto;
   border: 1px solid #ddd;
   overflow: hidden;
