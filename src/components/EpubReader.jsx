@@ -4,24 +4,29 @@ import ePub from 'epubjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-const EpubReader = ({ epubFile }) => {
+const EpubReader = ({ epubFile, onTocUpdate }) => {
   const viewerRef = useRef(null);
   const [book, setBook] = useState(null);
   const [rendition, setRendition] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentChapter, setCurrentChapter] = useState(null);
 
   useEffect(() => {
     if (epubFile && viewerRef.current) {
-      setIsLoading(true);
       const newBook = ePub(epubFile);
       setBook(newBook);
 
-      // Set specific dimensions for the rendition
       const newRendition = newBook.renderTo(viewerRef.current, {
-        width: '800px',  // Fixed width
-        height: '700px', // Fixed height
+        width: '800px',
+        height: '800px',
         flow: "scrolled-doc",
         spread: "none"
+      });
+
+      // Get TOC when book is loaded
+      newBook.loaded.navigation.then(() => {
+        const toc = newBook.navigation.toc;
+        onTocUpdate(toc);
       });
 
       newRendition.display().then(() => {
@@ -36,6 +41,12 @@ const EpubReader = ({ epubFile }) => {
       };
     }
   }, [epubFile]);
+
+  useEffect(() => {
+    if (rendition && currentChapter) {
+      rendition.display(currentChapter);
+    }
+  }, [currentChapter, rendition]);
 
   const handlePrevious = () => {
     if (rendition && !isLoading) {

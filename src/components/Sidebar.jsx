@@ -1,8 +1,9 @@
 // components/Sidebar.jsx
 import React from 'react';
 import EpubUploader from './EpubUploader';
+import ChapterList from './ChapterList';
 
-const Sidebar = ({ onFileUpload }) => {
+const Sidebar = ({ onFileUpload, chapters, onChapterSelect, currentChapter }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-section">
@@ -11,7 +12,11 @@ const Sidebar = ({ onFileUpload }) => {
       </div>
       <div className="sidebar-section">
         <h3 className="section-title">Table of Contents</h3>
-        {/* TOC content will go here */}
+        <ChapterList 
+          chapters={chapters}
+          onChapterSelect={onChapterSelect}
+          currentChapter={currentChapter}
+        />
       </div>
       <div className="sidebar-section">
         <h3 className="section-title">Bookmarks</h3>
